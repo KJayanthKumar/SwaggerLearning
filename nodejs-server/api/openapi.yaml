@@ -49,5 +49,7 @@ paths:
           description: Successfully returned
         "401":
           description: Quote doesn't exist
+        "400":
+          description: Bad Request
       x-swagger-router-controller: Stock
 components: {}
