@@ -1,0 +1,103 @@
+openapi: 3.0.0
+info: 
+  title: Person server.
+  description: This server contains API's for manipulating person data.
+  version: 1.0.0
+  
+paths:
+  /persons:
+    get:
+      tags:
+        - Get Persons
+      summary: Get a list of persons.
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonsList'
+    post:
+      tags: 
+        - Add person
+      summary: Creates an person.
+      requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+            text/plain:
+              schema:
+                type: string
+      responses:
+        200:
+          description: Success
+  
+  /persons/{personid}:
+    put:
+      tags: 
+        - Update Person
+      summary: Modify person details using person id.
+      description: update person in the data base person.
+      parameters: 
+        - in: path
+          name: personid
+          schema:
+            type: string
+          required: true
+      responses:
+        201:
+          description: updated
+        404: 
+          description: not found
+          
+    delete:
+      tags: 
+        - Delete Person
+      summary: Delete person using person id.
+      description: Delete person from the data base.
+      parameters: 
+        - in: path
+          name: personid
+          schema:
+            type: string
+          required: true
+      responses:
+        201:
+          description: deleted
+        404: 
+          description: not found
+    get:
+      tags: [Get person]
+      summary: Get person using person id.
+      parameters: 
+        - in: path
+          name: personid
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          description: Sucess
+
+components:
+  schemas:
+    PersonsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Person'
+    Person:
+      properties:
+        personid:
+          type: integer
+          format: int32
+        firstname:
+          type: string
+        secondname:
+          type: string
+        phoneNumber:
+          type: integer
+          format: int32
+        
+  
